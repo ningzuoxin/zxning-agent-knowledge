@@ -1,0 +1,5 @@
+# Runtime deps for the zxning-mem skill scripts
+pyyaml>=6.0
+
+# Test deps
+pytest>=8.0
