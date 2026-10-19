@@ -57,6 +57,10 @@ bash install.sh codebuddy        # CodeBuddy only
 bash install.sh trae             # Trae only
 bash install.sh copilot          # Current project's .agents/skills/ (GitHub Copilot, project-level)
 bash install.sh <any-directory>  # Custom directory
+
+bash install.sh snippet gdb      # (run at the business repo root) append the knowledge-base
+                                 # onboarding section to that project's AGENTS.md; omit the
+                                 # product name to default to the project directory name
 ```
 
 Install targets (all verified against the actual skill scan directories on this machine):
@@ -71,7 +75,13 @@ Installation only affects the skills themselves; at runtime the agent locates kn
 
 ### 2. Configure AGENTS.md
 
-Create an `AGENTS.md` at the root of the current working project, pick the example matching your runtime environment, and adjust `product` and `repo`.
+Business projects need a knowledge-base onboarding section so the agent recalls at session start and remembers durable findings. The fastest way is the snippet command (run at the business repo root):
+
+```bash
+bash install.sh snippet [product]   # idempotent; skips if the section already exists
+```
+
+Alternatively, create an `AGENTS.md` manually — pick the example matching your runtime environment, and adjust `product` and `repo`.
 
 > Skills only need to be installed once. Switching projects afterwards only requires **re-configuring AGENTS.md** (change `product` and `repo`).
 

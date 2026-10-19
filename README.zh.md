@@ -57,6 +57,9 @@ bash install.sh codebuddy        # 只装 CodeBuddy
 bash install.sh trae             # 只装 Trae
 bash install.sh copilot          # 装到当前项目的 .agents/skills/（GitHub Copilot，项目级）
 bash install.sh <任意目录>        # 自定义目录
+
+bash install.sh snippet gdb      # （在业务项目根目录运行）向该项目的 AGENTS.md 追加知识库
+                                 # 接入段；product 省略时默认取项目目录名
 ```
 
 落点对照（均为本机实证的技能扫描目录）：
@@ -71,7 +74,13 @@ bash install.sh <任意目录>        # 自定义目录
 
 ### 2. 配置 AGENTS.md
 
-在当前工作项目根目录创建 `AGENTS.md`，根据运行环境选择对应示例修改 `product` 和 `repo` 即可。
+业务项目需要一段知识库接入约定，让 agent 在会话开始自动检索、在发现可沉淀知识时主动写入。最快方式是 snippet 命令（在业务项目根目录运行）：
+
+```bash
+bash install.sh snippet [product]   # 幂等；已存在接入段则跳过
+```
+
+也可以手动创建 `AGENTS.md`：根据运行环境选择对应示例修改 `product` 和 `repo` 即可。
 
 > 安装 skills 只需一次。后续切换项目只需**重新配置 AGENTS.md**（修改 `product` 和 `repo`）。
 
