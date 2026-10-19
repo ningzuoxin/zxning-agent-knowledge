@@ -8,7 +8,7 @@
 zxning-agent-knowledge/                      # 知识库根（GitHub 仓库）
 ├── README.md                                # 项目说明与快速开始
 ├── DESIGN.md                                # 本设计文档
-├── bootstrap.sh                             # 一键安装脚本
+├── install.sh                             # 一键安装脚本
 ├── skills/                                  # skills 源码托管（见第三章）
 │   ├── zxning-mem-recall/                 # 读取 skill
 │   ├── zxning-mem-remember/                    # 写入 skill
@@ -41,7 +41,7 @@ zxning-agent-knowledge/                      # 知识库根（GitHub 仓库）
         └── INDEX.md                         # moc 索引（空表）
 ```
 
-> 注：工具仓/数据仓物理拆分后，产品目录（`demo-product/`、`zxning/` 等）位于独立的数据仓 `zxning-agent-knowledge-vault`（由 `ZXNING_AGENT_KNOWLEDGE_VAULT` 指向）；此图保留拆分前的单仓布局示意，`bootstrap.sh` 现位于工具仓根目录。
+> 注：工具仓/数据仓物理拆分后，产品目录（`demo-product/`、`zxning/` 等）位于独立的数据仓 `zxning-agent-knowledge-vault`（由 `ZXNING_AGENT_KNOWLEDGE_VAULT` 指向）；此图保留拆分前的单仓布局示意，`install.sh` 现位于工具仓根目录。
 
 ### 命名规范与职责
 
@@ -129,7 +129,7 @@ INDEX.md 设计为人类可读的 markdown，agent 可直接读取，无需依�
 检索：agent → zxning-mem-recall → 知识片段
 写入：agent → zxning-mem-remember → 自动沉淀 + 自动更新索引
 新建：agent → zxning-mem-init → 自动初始化
-安装：agent → 运行 bootstrap.sh → 自动安装
+安装：agent → 运行 install.sh → 自动安装
 ```
 
 两种模式可共存，agent 优先使用已安装的 skills，未安装时回退到直读模式。
@@ -248,19 +248,19 @@ agent 读取 frontmatter 即知道：知识库根路径、当前产品、当前 
 
 ### 安装
 
-skills 通过工具仓根目录的 `bootstrap.sh` 安装到目标 agent 的 skills 目录。由于仓库为私有，需先 clone 到本地，再执行本地安装：
+skills 通过工具仓根目录的 `install.sh` 安装到目标 agent 的 skills 目录。由于仓库为私有，需先 clone 到本地，再执行本地安装：
 
 ```bash
-bash /path/to/zxning-agent-knowledge/bootstrap.sh ~/.config/opencode/skills
+bash /path/to/zxning-agent-knowledge/install.sh ~/.config/opencode/skills
 ```
 
-`bootstrap.sh` 职责：
+`install.sh` 职责：
 
 1. 按参数解析目标目录（codebuddy / trae / copilot / 任意自定义目录，默认 codebuddy + trae）
 2. 复制 `zxning-mem-recall/` `zxning-mem-remember/` `zxning-mem-doctor/` `zxning-mem-init/` 到目标 skills 目录
 3. 检查环境变量 `ZXNING_AGENT_KNOWLEDGE_VAULT`，缺失时打印配置指引
 
-> bootstrap.sh **不负责创建 AGENTS.md**，那是工作项目的独立配置步骤。
+> install.sh **不负责创建 AGENTS.md**，那是工作项目的独立配置步骤。
 
 ### Validation skill
 
@@ -297,7 +297,7 @@ zxning-mem-remember skill 完成 → 自动调用 zxning-mem-doctor skill
 | frontmatter   | 从"人类约定"变为"skill 的机器契约"，必须严格、可解析 |
 | INDEX.md 维护 | 从"agent 手动更新"变为"zxning-mem-remember skill 自动维护" |
 | 入口          | 工作项目根 AGENTS.md 是 skills 的运行时配置入口      |
-| 安装          | 通过 bootstrap.sh 一键安装，无单独 skill             |
+| 安装          | 通过 install.sh 一键安装，无单独 skill             |
 
 ## 四、文件示例
 

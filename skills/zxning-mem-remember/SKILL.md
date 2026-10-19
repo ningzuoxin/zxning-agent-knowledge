@@ -113,7 +113,17 @@ After writing, automatically invoke the zxning-mem-doctor skill:
 python ../zxning-mem-doctor/scripts/validate.py "{knowledge_base_path}"
 ```
 
-All pass → done. On errors → print the error list and ask the user whether to fix.
+All pass → continue to Step 8. On errors → print the error list and ask the user whether to fix.
+
+### Step 8: Rebuild the HTML browser
+
+After doctor passes, rebuild the single-file HTML browser so human readers see the new knowledge immediately:
+
+```bash
+python ../../scripts/build_site.py "{knowledge_base_path}"
+```
+
+Success output: `built <vault>/index.html (N entries)`. Prefer the tool repo's venv interpreter (`.venv/Scripts/python.exe` on Windows) if PyYAML is not installed globally. If the script is missing, skip silently — this step is optional polish, never a blocker.
 
 ## moc precondition
 

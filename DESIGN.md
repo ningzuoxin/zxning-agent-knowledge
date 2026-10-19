@@ -8,7 +8,7 @@
 zxning-agent-knowledge/                      # Knowledge base root (GitHub repo)
 ├── README.md                                # Project intro & quick start
 ├── DESIGN.md                                # This design document
-├── bootstrap.sh                             # One-command skill installer
+├── install.sh                             # One-command skill installer
 ├── skills/                                  # Skills source (see chapter 3)
 │   ├── zxning-mem-recall/                 # Retrieve skill
 │   ├── zxning-mem-remember/                    # Write skill
@@ -41,7 +41,7 @@ zxning-agent-knowledge/                      # Knowledge base root (GitHub repo)
         └── INDEX.md                         # moc index (empty table)
 ```
 
-> Note: after the tool-repo/data-repo split, the product directories (`demo-product/`, `zxning/`, ...) live in the separate data repo `zxning-agent-knowledge-vault` (pointed to by `ZXNING_AGENT_KNOWLEDGE_VAULT`). The tree above shows the pre-split single-repo layout; `bootstrap.sh` now sits at the tool-repo root.
+> Note: after the tool-repo/data-repo split, the product directories (`demo-product/`, `zxning/`, ...) live in the separate data repo `zxning-agent-knowledge-vault` (pointed to by `ZXNING_AGENT_KNOWLEDGE_VAULT`). The tree above shows the pre-split single-repo layout; `install.sh` now sits at the tool-repo root.
 
 ### Naming Rules and Responsibilities
 
@@ -129,7 +129,7 @@ Create:   agent → create product/repo directories + INDEX.md (manual)
 Retrieve: agent → zxning-mem-recall → knowledge fragments
 Write:    agent → zxning-mem-remember → auto deposit + auto index update
 Create:   agent → zxning-mem-init → auto init
-Install:  agent → run bootstrap.sh → auto install
+Install:  agent → run install.sh → auto install
 ```
 
 Both modes can coexist; the agent prefers installed skills and falls back to direct-read mode otherwise.
@@ -248,19 +248,19 @@ Continue after the user enters `y`; otherwise roll back (entry content kept in a
 
 ### Installation
 
-Skills are installed into a target agent's skills directory via the tool-repo root `bootstrap.sh`. The repo is private: clone it locally first, then run the local installer:
+Skills are installed into a target agent's skills directory via the tool-repo root `install.sh`. The repo is private: clone it locally first, then run the local installer:
 
 ```bash
-bash /path/to/zxning-agent-knowledge/bootstrap.sh ~/.config/opencode/skills
+bash /path/to/zxning-agent-knowledge/install.sh ~/.config/opencode/skills
 ```
 
-`bootstrap.sh` responsibilities:
+`install.sh` responsibilities:
 
 1. Resolve the target directory from the arguments (codebuddy / trae / copilot / any custom directory; defaults to codebuddy + trae)
 2. Copy `zxning-mem-recall/` `zxning-mem-remember/` `zxning-mem-doctor/` `zxning-mem-init/` into the target skills directory
 3. Check the `ZXNING_AGENT_KNOWLEDGE_VAULT` environment variable and print setup guidance if it's missing
 
-> bootstrap.sh **does not create AGENTS.md**; that's a separate configuration step for the working project.
+> install.sh **does not create AGENTS.md**; that's a separate configuration step for the working project.
 
 ### Validate Skill
 
@@ -297,7 +297,7 @@ zxning-mem-remember skill done → auto-call the zxning-mem-doctor skill
 | frontmatter | from "human convention" to a "machine contract for skills"; must be strict and parseable |
 | INDEX.md maintenance | from "manual agent updates" to "auto-maintained by the zxning-mem-remember skill" |
 | Entry point | the working project's root AGENTS.md is the runtime config entry for skills |
-| Installation | one command via bootstrap.sh; no separate skill |
+| Installation | one command via install.sh; no separate skill |
 
 ## 4. File Examples
 

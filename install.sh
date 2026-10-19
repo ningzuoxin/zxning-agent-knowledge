@@ -1,10 +1,10 @@
 #!/bin/bash
-# Bootstrap: one-command installer for the knowledge skills into an AI agent's skills directory
+# install.sh: one-command installer for the knowledge skills into an AI agent's skills directory
 # Usage:
-#   bash bootstrap.sh                     # default: codebuddy + trae (global)
-#   bash bootstrap.sh codebuddy trae      # pick targets by name
-#   bash bootstrap.sh copilot             # current project's .agents/skills/ (run at the business repo root)
-#   bash bootstrap.sh <any-directory>     # custom directory
+#   bash install.sh                     # default: codebuddy + trae (global)
+#   bash install.sh codebuddy trae      # pick targets by name
+#   bash install.sh copilot             # current project's .agents/skills/ (run at the business repo root)
+#   bash install.sh <any-directory>     # custom directory
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -22,7 +22,7 @@ target_dir() {
 
 usage() {
   cat <<'EOF'
-Usage: bash bootstrap.sh [target...]
+Usage: bash install.sh [target...]
 
 Targets:
   codebuddy    ~/.codebuddy/skills               (CodeBuddy IDE, global)
@@ -36,7 +36,7 @@ EOF
 }
 
 [ -f "$SCRIPT_DIR/skills/zxning-mem-recall/SKILL.md" ] || {
-  echo "Error: skills/ not found (bootstrap.sh must sit at the tool repo root)"
+  echo "Error: skills/ not found (install.sh must sit at the tool repo root)"
   exit 1
 }
 
@@ -60,6 +60,7 @@ for t in "${TARGETS[@]}"; do
     if [ -d "$SRC" ]; then
       rm -rf "$DST/$skill"
       cp -r "$SRC" "$DST/$skill"
+      find "$DST/$skill" -type d -name "__pycache__" -prune -exec rm -rf {} +
       echo "  ✓ installed: $skill"
     else
       echo "  ⚠ skipped: $skill (source directory not found)"

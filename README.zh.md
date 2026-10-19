@@ -52,11 +52,11 @@ setx ZXNING_AGENT_KNOWLEDGE_VAULT "D:\workspaces\zxning\zxning-agent-knowledge-v
 ```bash
 cd /d/workspaces/zxning/zxning-agent-knowledge
 
-bash bootstrap.sh                  # 默认：装到 CodeBuddy + Trae（全局，一次到位）
-bash bootstrap.sh codebuddy        # 只装 CodeBuddy
-bash bootstrap.sh trae             # 只装 Trae
-bash bootstrap.sh copilot          # 装到当前项目的 .agents/skills/（GitHub Copilot，项目级）
-bash bootstrap.sh <任意目录>        # 自定义目录
+bash install.sh                  # 默认：装到 CodeBuddy + Trae（全局，一次到位）
+bash install.sh codebuddy        # 只装 CodeBuddy
+bash install.sh trae             # 只装 Trae
+bash install.sh copilot          # 装到当前项目的 .agents/skills/（GitHub Copilot，项目级）
+bash install.sh <任意目录>        # 自定义目录
 ```
 
 落点对照（均为本机实证的技能扫描目录）：
@@ -146,7 +146,7 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pytest tests/ -v
 ```
 
-测试覆盖四个 skill 脚本（init/validate/retrieve/write），以及文档、`bootstrap.sh` 与 `skills/` 目录一致性的契约检查。
+测试覆盖四个 skill 脚本（init/validate/retrieve/write），以及文档、`install.sh` 与 `skills/` 目录一致性的契约检查。
 
 ## 浏览器浏览知识库
 
@@ -156,7 +156,7 @@ python -m venv .venv
 .venv\Scripts\python.exe scripts\build_site.py "D:\path\to\zxning-agent-knowledge-vault"
 ```
 
-生成 `index.html`（与数据放在一起），提供 product/repo/条目树、全文搜索、type/status 过滤，以及 moc 参考链接的页内跳转。知识更新后重新构建即可（也可挂在写入会话 doctor 步骤之后自动重建）。
+生成 `index.html`（与数据放在一起），提供 product/repo/条目树、全文搜索、type/status 过滤，以及 moc 参考链接的页内跳转。remember skill 每次写入知识后会自动重建（Step 8）；直接手改条目文件时，手动执行一次上面命令即可。
 
 ## Skills（可选增强）
 

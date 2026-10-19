@@ -52,11 +52,11 @@ Run at the tool repo root (use git-bash on Windows):
 ```bash
 cd /d/workspaces/zxning/zxning-agent-knowledge
 
-bash bootstrap.sh                  # Default: install to CodeBuddy + Trae (global, one shot)
-bash bootstrap.sh codebuddy        # CodeBuddy only
-bash bootstrap.sh trae             # Trae only
-bash bootstrap.sh copilot          # Current project's .agents/skills/ (GitHub Copilot, project-level)
-bash bootstrap.sh <any-directory>  # Custom directory
+bash install.sh                  # Default: install to CodeBuddy + Trae (global, one shot)
+bash install.sh codebuddy        # CodeBuddy only
+bash install.sh trae             # Trae only
+bash install.sh copilot          # Current project's .agents/skills/ (GitHub Copilot, project-level)
+bash install.sh <any-directory>  # Custom directory
 ```
 
 Install targets (all verified against the actual skill scan directories on this machine):
@@ -146,7 +146,7 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pytest tests/ -v
 ```
 
-The suite covers the four skill scripts (init/validate/retrieve/write) plus contract checks that keep the docs, `bootstrap.sh`, and the `skills/` directory in sync.
+The suite covers the four skill scripts (init/validate/retrieve/write) plus contract checks that keep the docs, `install.sh`, and the `skills/` directory in sync.
 
 ## Browse the Vault in a Browser
 
@@ -156,7 +156,7 @@ Build a single self-contained HTML page from the vault and open it directly from
 .venv\Scripts\python.exe scripts\build_site.py "D:\path\to\zxning-agent-knowledge-vault"
 ```
 
-This writes `index.html` next to the data. It offers a product/repo/entry tree, full-text search, type/status filters, and in-page jumps through moc reference links. Rebuild after knowledge changes (or wire it after the doctor step of a write session).
+This writes `index.html` next to the data. It offers a product/repo/entry tree, full-text search, type/status filters, and in-page jumps through moc reference links. The remember skill rebuilds it automatically (Step 8) after each knowledge write; run the command manually only when you edit entry files directly.
 
 ## Skills (Optional Enhancement)
 

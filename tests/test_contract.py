@@ -1,4 +1,4 @@
-"""Contract tests: docs, bootstrap.sh and the filesystem must stay in sync."""
+"""Contract tests: docs, install.sh and the filesystem must stay in sync."""
 
 import re
 
@@ -11,14 +11,14 @@ def skill_dirs():
     return {d.name for d in SKILLS.iterdir() if d.is_dir()}
 
 
-def test_bootstrap_installs_exactly_the_existing_skills():
-    text = (REPO_ROOT / "bootstrap.sh").read_text(encoding="utf-8")
+def test_install_installs_exactly_the_existing_skills():
+    text = (REPO_ROOT / "install.sh").read_text(encoding="utf-8")
     listed = set(re.search(r"for skill in (.+?); do", text).group(1).split())
     assert listed == skill_dirs()
 
 
-def test_bootstrap_guard_path_exists():
-    text = (REPO_ROOT / "bootstrap.sh").read_text(encoding="utf-8")
+def test_install_guard_path_exists():
+    text = (REPO_ROOT / "install.sh").read_text(encoding="utf-8")
     for ref in re.findall(r"\$SCRIPT_DIR/(skills/[\w-]+/SKILL\.md)", text):
         assert (REPO_ROOT / ref).exists(), ref
 
