@@ -16,6 +16,8 @@ Resolve the knowledge data root (retrieval is scoped to that directory):
 
 Also read `product` / `repo` from AGENTS.md.
 
+All `{knowledge_base_path}` placeholders in the commands below stand for this resolved path — substitute the actual value, never the literal placeholder.
+
 ### Step 1: Run retrieval
 
 ```bash

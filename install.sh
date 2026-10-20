@@ -47,6 +47,7 @@ EOF
 
 if [ $# -eq 0 ]; then
   TARGETS=(codebuddy trae)
+  MODE=install
 elif [ "$1" = "snippet" ]; then
   [ $# -le 2 ] || usage
   MODE=snippet

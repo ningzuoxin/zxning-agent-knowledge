@@ -8,10 +8,18 @@ allowed-tools: Bash, Read
 
 ## Workflow
 
+### Step 0: Preconditions
+
+Resolve the knowledge data root (creation targets must live under it):
+1. Prefer the environment variable `ZXNING_AGENT_KNOWLEDGE_VAULT`
+2. If unset, fall back to `knowledge_base_path` from AGENTS.md
+
+All `{knowledge_base_path}` placeholders in the commands below stand for this resolved path — substitute the actual value, never the literal placeholder.
+
 ### Step 1: Gather information
 
 Confirm:
-- The knowledge data root (creation targets must live under it): prefer the environment variable `ZXNING_AGENT_KNOWLEDGE_VAULT`; if unset, fall back to `knowledge_base_path` from AGENTS.md
+- Knowledge data root (already resolved in Step 0)
 - Product name
 - Repo name
 - Product description (needed when onboarding a new product)

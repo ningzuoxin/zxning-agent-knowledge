@@ -63,3 +63,10 @@ def test_install_sh_wires_snippet_target():
     assert 'AGENTS_SNIPPET.md' in text
     assert "zxning-mem:begin" in text
     assert "snippet" in text
+
+
+def test_every_skill_resolves_data_root_from_env():
+    for d in skill_dirs():
+        text = (REPO_ROOT / "skills" / d / "SKILL.md").read_text(encoding="utf-8")
+        assert "ZXNING_AGENT_KNOWLEDGE_VAULT" in text, f"{d}: env var missing"
+        assert "stand for this resolved path" in text, f"{d}: placeholder substitution note missing"

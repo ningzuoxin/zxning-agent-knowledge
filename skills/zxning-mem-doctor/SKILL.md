@@ -20,7 +20,7 @@ allowed-tools: Bash, Read
 
 ## Workflow
 
-1. Resolve the knowledge data root (validation is scoped to that directory): prefer the environment variable `ZXNING_AGENT_KNOWLEDGE_VAULT`; if unset, fall back to `knowledge_base_path` from AGENTS.md
+1. Resolve the knowledge data root (validation is scoped to that directory): prefer the environment variable `ZXNING_AGENT_KNOWLEDGE_VAULT`; if unset, fall back to `knowledge_base_path` from AGENTS.md. All `{knowledge_base_path}` placeholders in the commands below stand for this resolved path — substitute the actual value, never the literal placeholder.
 2. Run the validation script:
 
 ```bash

@@ -16,6 +16,8 @@ Resolve the knowledge data root (the write target must live under it):
 
 Also read `product` / `repo` / `knowledge_conflict` (optional) from AGENTS.md.
 
+All `{knowledge_base_path}` placeholders in the commands below stand for this resolved path — substitute the actual value, never the literal placeholder.
+
 ### Step 1: Gather information
 
 Confirm with the user or extract from context:
